@@ -1431,7 +1431,6 @@ std::error_code BitcodeReader::ParseMetadata() {
       continue;
     }
 
-    bool IsFunctionLocal = false;
     // Read a record.
     Record.clear();
     Code = Stream.readRecord(Code, Record);
@@ -1473,8 +1472,6 @@ std::error_code BitcodeReader::ParseMetadata() {
     }
     case METADATA_FN_NODE_2_7:
     case bitc::METADATA_OLD_FN_NODE:
-      IsFunctionLocal = true;
-      // fall-through
     case METADATA_NODE_2_7:
     case bitc::METADATA_OLD_NODE: {
       if (Code == METADATA_FN_NODE_2_7 ||

@@ -1743,7 +1743,6 @@ std::error_code BitcodeReader::ParseMetadata() {
       continue;
     }
 
-    bool IsFunctionLocal = false;
     // Read a record.
     Record.clear();
     Code = Stream.readRecord(Code, Record);
@@ -1772,8 +1771,6 @@ std::error_code BitcodeReader::ParseMetadata() {
       break;
     }
     case bitc::METADATA_OLD_FN_NODE:
-      IsFunctionLocal = true;
-      // fall-through
     case bitc::METADATA_OLD_NODE: {
       if (Record.size() % 2 == 1)
         return Error("Invalid record");
